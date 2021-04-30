@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace RegexTest
 {
-    class Program
+    class MyException : Exception
     {
-        static void Main(string[] args)
+        public MyException(String message) : base(message)
+        {
+
+        }
+        public static void Main(string[] args)
         {
             Console.WriteLine("Choose what to Enter:");
             Console.WriteLine("-------------------------");
@@ -16,39 +20,101 @@ namespace RegexTest
             Console.WriteLine("-------------------------");
 
             int input = Convert.ToInt32(Console.ReadLine());
-
             switch (input)
             {
                 case 1:
-                    Console.WriteLine("Enter your First Name:");
-                    RegexPatterns name = new RegexPatterns();
-                    bool result = name.ValidateName(Console.ReadLine());
-                    Console.WriteLine(result);
+                    try
+                    {
+                        Console.WriteLine("Enter your First Name:");
+                        RegexPatterns name = new RegexPatterns();
+                        bool result = name.ValidateName(Console.ReadLine());
+                        if (result == false)
+                        {
+                            throw new MyException("Must contain characters only. Having first letter capital with minimum 3 characters.\n====================");
+                        }
+                    }
+                    catch (MyException e)
+                    {
+                        Console.WriteLine("====================\nInvalid Input\n====================");
+                        Console.WriteLine(e.Message);
+                    }
                     break;
                 case 2:
-                    Console.WriteLine("Enter your Last Name:");
-                    RegexPatterns lastname = new RegexPatterns();
-                    bool resultlastname = lastname.ValidateLastName(Console.ReadLine());
-                    Console.WriteLine(resultlastname);
+                    try
+                    {
+                        Console.WriteLine("Enter your Last Name:");
+                        RegexPatterns lastname = new RegexPatterns();
+                        bool resultlastname = lastname.ValidateLastName(Console.ReadLine());
+                        Console.WriteLine(resultlastname);
+                        if (resultlastname == false)
+                        {
+                            throw new MyException("Must contain characters only. Having first letter capital with minimum 3 characters.\n====================");
+                        }
+                    }
+                    catch (MyException e)
+                    {
+                        Console.WriteLine("====================\nInvalid Input\n====================");
+                        Console.WriteLine(e.Message);
+                    }
                     break;
+
                 case 3:
-                    Console.WriteLine("Enter your Phone Number:");
-                    RegexPatterns phonenum = new RegexPatterns();
-                    bool resultphonenum = phonenum.ValidatePhoneNum(Console.ReadLine());
-                    Console.WriteLine(resultphonenum);
+                    try
+                    {
+                        Console.WriteLine("Enter your Phone Number:");
+                        RegexPatterns phonenum = new RegexPatterns();
+                        bool resultphonenum = phonenum.ValidatePhoneNum(Console.ReadLine());
+                        Console.WriteLine(resultphonenum);
+                        if (resultphonenum == false)
+                        {
+                            throw new MyException("Must contain integers only. Starting with '91' and space and having exact 10 digits as Phone Number.\n====================");
+                        }
+                    }
+                    catch (MyException e)
+                    {
+                        Console.WriteLine("====================\nInvalid Input\n====================");
+                        Console.WriteLine(e.Message);
+                    }
                     break;
+
                 case 4:
-                    Console.WriteLine("Enter your Email Id:");
-                    RegexPatterns emailid = new RegexPatterns();
-                    bool resultemailid = emailid.ValidateEmail(Console.ReadLine());
-                    Console.WriteLine(resultemailid);
+                    try
+                    {
+                        Console.WriteLine("Enter your Email Id:");
+                        RegexPatterns emailid = new RegexPatterns();
+                        bool resultemailid = emailid.ValidateEmail(Console.ReadLine());
+                        Console.WriteLine(resultemailid);
+                        if (resultemailid == false)
+                        {
+                            throw new MyException("Must contain Alphabet and Numeric Combination only.\nEnding with proper domain address e.g. '@gmail.com'\n====================");
+                        }
+                    }
+                    catch (MyException e)
+                    {
+                        Console.WriteLine("====================\nInvalid Input\n====================");
+                        Console.WriteLine(e.Message);
+                    }
                     break;
                 case 5:
-                    Console.WriteLine("Enter your Password:");
-                    RegexPatterns pass = new RegexPatterns();
-                    bool resultpass = pass.ValidatePassword(Console.ReadLine());
-                    Console.WriteLine(resultpass);
+                    try
+                    {
+                        Console.WriteLine("Enter your Password:");
+                        RegexPatterns pass = new RegexPatterns();
+                        bool resultpass = pass.ValidatePassword(Console.ReadLine());
+                        Console.WriteLine(resultpass);
+                        if (resultpass == false)
+                        {
+                            throw new MyException("Must contain Alphanumeric combination.\nConsisting atleast 1 uppercase character, atleast 1 numeric value.\nAnd exactly one special character.\n====================");
+                        }
+                    }
+                    catch (MyException e)
+                    {
+                        Console.WriteLine("====================\nInvalid Input\n====================");
+                        Console.WriteLine(e.Message);
+                    }
                     break;
+
+
             }
             Console.ReadKey();
         }
