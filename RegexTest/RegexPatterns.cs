@@ -15,25 +15,11 @@ namespace RegexTest
         public const string EMAIL_REGEX = "^[a-z0-9A-Z]+([.][a-zA-Z0-9]+)?[@][a-zA-Z]+[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,2})?$";
         public const string PASSWORD_REGEX = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+]).{8,}$";
 
-        public bool ValidateName(string firstname)
-        {
-            return Regex.IsMatch(firstname, FIRSTNAME_REGEX);
-        }
-        public bool ValidateLastName(string lastname)
-        {
-            return Regex.IsMatch(lastname, LASTNAME_REGEX);
-        }
-        public bool ValidatePhoneNum(string phonenum)
-        {
-            return Regex.IsMatch(phonenum, PHONENUM_REGEX);
-        }
-        public bool ValidateEmail(string email)
-        {
-            return Regex.IsMatch(email, EMAIL_REGEX);
-        }
-        public bool ValidatePassword(string password)
-        {
-            return Regex.IsMatch(password, PASSWORD_REGEX);
-        }
+        //Func<string, string, bool> Test = (x, y) => x > y; ~~LAMBDA EXP
+        public Func<string, string, bool> ValidateName = (name, FIRSTNAME_REGEX) => Regex.IsMatch(name, FIRSTNAME_REGEX);
+        public Func<string, string, bool> ValidateLastName = (lastname, LASTNAME_REGEX) => Regex.IsMatch(lastname, LASTNAME_REGEX);
+        public Func<string, string, bool> ValidatePhoneNum = (phonenum, PHONENUM_REGEX) => Regex.IsMatch(phonenum, PHONENUM_REGEX);
+        public Func<string, string, bool> ValidateEmail = (email, EMAIL_REGEX) => Regex.IsMatch(email, EMAIL_REGEX);
+        public Func<string, string, bool> ValidatePassword = (password, PASSWORD_REGEX) => Regex.IsMatch(password, PASSWORD_REGEX);
     }
 }
